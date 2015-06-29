@@ -25,12 +25,11 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContactListFragment extends Fragment {
+public class ContactListFragment extends ContractFragment<ContactListFragment.Contract> {
 
     public static final String EXTRA = "CVA_Contact";
     private ContactList mContacts;
     private ContactAdapter mAdapter;
-    private Contract mContract;
 
     public ContactListFragment() {
         // Required empty public constructor
@@ -45,7 +44,7 @@ public class ContactListFragment extends Fragment {
 
         mContacts = ContactList.getInstance();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             Contact contact1 = new Contact();
             contact1.setName("Akshay Pall");
             contact1.emails = new ArrayList<String>();
@@ -56,7 +55,7 @@ public class ContactListFragment extends Fragment {
             contact1.phoneNumbers.add("111-111-1222");
             mContacts.add(contact1);
         }
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 6; i++) {
             Contact contact2 = new Contact();
             contact2.setName("Test Name");
             contact2.emails = new ArrayList<String>();
@@ -71,7 +70,7 @@ public class ContactListFragment extends Fragment {
         ListView contactListView = (ListView)v.findViewById(R.id.contact_list_view);
         mAdapter = new ContactAdapter(mContacts);
         contactListView.setAdapter(mAdapter);
-        contactListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+        /*contactListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             int previousFirstItemSeen = 0;
 
             @Override
@@ -89,35 +88,18 @@ public class ContactListFragment extends Fragment {
                 }
                 previousFirstItemSeen = firstVisibleItem;
             }
-        });
+        });*/
 
         contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (mContract != null){
-                    mContract.selectedPosition(position);
+                if (getmContract() != null){
+                    getmContract().selectedPosition(position);
                 }
             }
         });
 
         return v;
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        try {
-            mContract = (Contract)getActivity();
-        } catch (ClassCastException e){
-            throw new IllegalStateException("Error casting actvity");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mContract = null;
     }
 
     @Override

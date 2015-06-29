@@ -1,6 +1,7 @@
 package com.example.akshaypall.mycontacts;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContactViewFragment extends Fragment {
+public class ContactViewFragment extends ContractFragment<ContactViewFragment.Contract> {
 
     public static final String TAG = "Click complete";
     private int mMainColour;
@@ -47,6 +48,7 @@ public class ContactViewFragment extends Fragment {
         this.mPosition = mPosition;
         if (mAdapter != null) {
             mContact = ContactList.getInstance().get(mPosition);
+            mAdapter.setContact(mContact);
             updateUI();
         }
     }
@@ -71,9 +73,13 @@ public class ContactViewFragment extends Fragment {
                 if (itemId == R.id.contact_view_edit) {
                     Log.d(TAG, "Edit button clicked");
 
-                    Intent i = new Intent(getActivity(), ContactEditActivity.class);
+                    getmContract().selectEditPosition(mPosition);
+
+                    /*Intent i = new Intent(getActivity(), ContactEditActivity.class);
                     i.putExtra(ContactEditActivity.EXTRA, mPosition);
-                    startActivity(i);
+                    startActivity(i);*/
+
+
                     return true;
                 }
                 return false;
@@ -187,6 +193,10 @@ public class ContactViewFragment extends Fragment {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public interface Contract {
+        public void selectEditPosition (int position);
     }
 
 }
