@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.example.akshaypall.mycontacts.ContactViewActivity">
+
+    <com.example.akshaypall.material.RatioLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ratio="0.5625"
+        android:id="@+id/contact_view_header"
+        android:layout_weight="0">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/wonderland"
+            android:id="@+id/contact_view_image"
+            android:scaleType="centerCrop"/>
+        <TextView
+            android:text="@string/hello_world"
+            android:id="@+id/contact_view_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/vertical_small_margin"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@android:color/white"/>
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:fitsSystemWindows="true"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:id="@+id/contact_view_toolbar">
+        </android.support.v7.widget.Toolbar>
+    </com.example.akshaypall.material.RatioLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/contact_view_fields"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/vertical_small_margin"
+        android:paddingRight="@dimen/vertical_small_margin">
+
+    </ListView>
+
+</LinearLayout>
